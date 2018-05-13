@@ -1,4 +1,7 @@
 # MyDoNotRemove
 
-I am sorry to tell you,
-stable version is not out YET.
+This is developer version 
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations   .
