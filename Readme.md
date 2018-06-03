@@ -1,6 +1,6 @@
 # MyDoNotRemove
 
-This is developer version 
+This is developer version
 
 ## License
 
