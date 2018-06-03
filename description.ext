@@ -1,0 +1,231 @@
+/*
+    Author: Vodas3
+
+    Description:
+    Overall mission attributes, and entities that will be available to other script
+
+    More info:
+    https://community.bistudio.com/wiki/Description.ext
+
+*/
+//#include "defines.hpp"
+//#include "dialogs.hpp"
+author="Vodas3";
+OnLoadMission = "Guerilla wars";   //Displays a message while the mission is loading.
+overviewText = "Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles.Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.";//TODO
+overviewTextLocked = "SERVER LOCKED";
+joinUnassigned = 1; //assigned a free playable slot in the mission lobby
+//skipLobby = 0;        //bypassing role selection screen.
+allowFunctionsLog = 1; //Allows functions to log to the RPT file TODO disable at stable
+enableDebugConsole =1;  //Allows access to the Debug Console TODO stable ?
+
+corpseManagerMode = 1;  //Sets the mode for corpse removal manager TODO customize later
+corpseLimit = 20;   //Corpse limit before which ( <= ) corpseRemovalMaxTime applies and after which ( > ) corpseRemovalMinTime applies TODO performance
+corpseRemovalMinTime = 60; //Remove all bodies that have been dead longer than corpseRemovalMinTime  TODO performance
+corpseRemovalMaxTime = 3600; //Maximum time a corpse can remain TODO performance
+
+wreckManagerMode = 1; //Sets the mode for wreck removal manager " All"
+wreckLimit = 15; //Vehicle wreck limit before which ( <= ) wreckRemovalMaxTime applies and after which ( > ) wreckRemovalMinTime applies TODO performance
+wreckRemovalMinTime= 60; //Remove all wrecks that have existed longer   TODO performance
+wreckRemovalMaxTime = 7200; //Maximum time a wreck can remain   TODO performance
+
+minPlayerDistance = 400;    //he minimum distance between corpse or wreck and nearest player    TODO performance
+
+
+
+
+//onLoadIntro = "YourMessage";  //Displays a message while the intro is loading.
+//onLoadIntroTime = 1;          //Define whether you will see the time and date displayed while the intro loads. 1 means visible, 0 hidden. Default: 0
+
+//overviewPicture = "pic.paa"; //TODO
+//loadScreen = "pic.paa"; //TODO
+briefingName="Guerilla wars";
+onLoadName="Guerilla wars";
+
+respawn=3;                  //3=BASE Sets respawn type TODO with weapon handler
+respawnButton =1;
+respawnDelay = 20;          //Set respawn delay in seconds
+respawnVehicleDelay = 120;  // Set vehicle respawn delay in seconds.
+respawnDialog = 1;          //Show the scoreboard and respawn countdown timer for a player if he is killed with respawnType 3. Default is 1
+respawnOnStart = 1;         //Respawn on start. Run respawn script on start.
+respawnTemplates[] = {"MenuInventory","MenuPosition"};            //Templates are pre-defined scripts called when player dies and respawns https://community.bistudio.com/wiki/Arma_3_Respawn#Respawn_Templates
+
+ReviveMode = 2;             //0: disabled, 1: enabled, 2: controlled by player attributes
+ReviveUnconsciousStateMode= 1; //0: basic, 1: advanced, 2: realistic
+ReviveRequiredTrait = 0;    //0: none, 1: medic trait is required
+ReviveRequiredItems = 2;    //0: none, 1: medkit, 2: medkit or first aid kit
+ReviveRequiredItemsFakConsumed = 1; //0: first aid kit is not consumed upon revive, 1: first aid kit is consumed
+ReviveMedicSpeedMultiplier=3;   //speed multiplier for revive performed by medic
+//reviveDelay = 6;            //The time it takes to revive an incapacitated unit (default: 6 seconds)
+reviveForceRespawnDelay=0;  //The time it takes for an incapacitated unit to force their respawn (default: 3 seconds).
+//reviveBleedOutDelay = 120;  //The time it takes for a unit to bleed out (default: 120 sec).
+
+enableTeamSwitch = 0;       //Manual team switch disabled
+
+//class CfgCameraEffects{};   //Configure custom cameraEffect https://community.bistudio.com/wiki/cameraEffect
+//class CfgSounds{};   //General sounds that can be used for dialog, voiceovers in the briefing etc. http://ofp.toadlife.net/downloads/tutorials/tutorial_sound/tutorial_sound.html
+//class CfgWorlds{}; //TODO
+//class CfgSFX{};     //CfgSFX class is used to configure repeating and random sound effects with range of parameters  https://community.bistudio.com/wiki/CfgSFX
+//class CfgRadio{};   //Radio sentences
+//class CfgMusic{};   //???
+//class CfgIdentities{};  // add ?
+/*class CfgFunctions{
+    //#include "Functions\FunctionList.hpp"
+};*/   //Define functions for your mission https://community.bistudio.com/wiki/Functions
+//class CfgLeaflets{};    //Define leaflets for your missions https://community.bistudio.com/wiki/Arma_3_Leaflets
+//class CfgRemoteExecCommands {}; //Define commands available for remote execution https://community.bistudio.com/wiki/CfgRemoteExecCommands
+//class CfgRemoteExec{}; // Define remoteExec restrictions
+//class CfgUnitInsignia{}; //Define custom unit insignia (shoulder patches) TODO
+class CfgDebriefing{ //TODO remake
+	class End1
+	{
+		title = "V I C T O R Y";
+		subtitle = "Altis is Ours!";
+		description = "The population of Altis loves you!<br/>The FIA brave soldiers prooved their valour, and Barbolani, Altis new Prime Minister, could at last to have a nice holliday. A deserved rest in a Greek island, drinking with Petros.";
+		picture = "n_inf";
+		pictureColor[] = {0.0,0.5,0.0,1};
+	};
+    class petrosDead
+    {
+        title = "Petros is Dead";
+        subtitle = "Petros is Dead";
+        description = "Petros is Dead";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+    class destroyedCities
+    {
+        title = "Altis is Destroyed";
+        subtitle = "Altis got Destroyed by CSAT";
+        description = "Eight cities got destroyed by CSAT.<br/>Altis no longer exists, nobody wants to live here.";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+    class modUnautorized
+    {
+        title = "Incompatible Mods";
+        subtitle = "Incompatible Mods detected";
+        description = "An incompatible mod installed on the server or your PC has been detected. To avoid support problems the mission is finished. Please uninstall unsupported (ASR AI, aLIVE, MCC or any AI behaviour) mods from your computer or server to be able to play Antistasi.";
+        picture = "b_unknown";
+        pictureColor[] = {0.0,0.5,0.0,1};
+    };
+    class serverFull
+    {
+        title = "Reserved Slot";
+        subtitle = "This slot is reserved";
+        description = "Sorry, but this slot is reserved for a Server Member. To become member, please contact to the server admin or clan.";
+        picture = "b_unknown";
+        pictureColor[] = {0.0,0.5,0.0,1};
+    };
+};  //Avaible Debreifing
+//class CfgDebriefingSections{}; //Define custom sections to be displayed on the debriefing screen. Useful for custom scoring systems or displaying player achievements. TODO
+class RscTitles
+{
+	class ExampleTitle
+	{
+		idd = -1;
+		duration = 1;
+		class controls
+		{
+			class ExampleControl
+			{
+				idc = -1;
+				type = 0;
+				style = 0;
+				x = 0;
+				y = 0;
+				w = 1;
+				h = 1;
+				font = "EtelkaNarrowMediumPro";
+				sizeEx = 0.1;
+				colorBackground[] = {0,0,0,1};
+				colorText[] = {1,1,1,1};
+				text = "Example Text";
+			};
+		};
+	};
+}; //Defines custom UI displays
+class weapons{
+	class AK74 {count = 8;};
+	class RPG7V {count = 2;};
+	class Binocular {count = 2;};
+}; //Set weapons available to players during the briefing.
+//class backpacks{}; //Set backpacks available to players during the briefing.
+//class Params{};//https://community.bistudio.com/wiki/Arma_3_Mission_Parameters TODO
+//class CfgDisabledCommands{}; //Disables certain script commands https://community.bistudio.com/wiki/CfgDisabledCommands
+class Header{
+	gameType = Coop; // Game type, see 'class' columns in the table below
+	minPlayers = 1; //min # of players the mission supports
+	maxPlayers = 26; //max # of players the mission supports
+};
+//class CfgTaskTypes{};//TODO
+//class CfgVehicleTemplates{}; //TODO
+//class CfgUnitTemplates{}; //TODO
+//class CfgUnitTemplates{}; //TODO
+
+
+//espawnWeaponsWest[] = {};//weapons which BLUFOR players will receive upon respawn
+//respawnMagazinesWest[] = {}; //Set magazineswhich BLUFOR players will receive upon respawn
+
+//respawnWeaponsEast[] = {}; //Set weapons which OPFOR players will receive upon respawn
+//respawnMagazinesEast[] = {}; //Set magazineswhich OPFOR players will receive upon respawn
+
+respawnWeaponsGuer[] = {}; //Set weapons which Independent players will receive upon respawn
+respawnMagazinesGuer[] = {}; //Set magazineswhich Independent players will receive upon respawn.
+
+//respawnWeaponsCiv[] = {}; //Set weapons which Civilian players will receive upon respawn.
+//respawnMagazinesCiv[] = {}; //Set magazineswhich Civilian players will receive upon respawn.
+
+//disableRandomization[] = {}; //Disables randomization on certain objects, object types or object kinds in the mission.
+
+showHUD[] = {
+	true,	// Scripted HUD (same as showHUD command)
+	true,	// Vehicle + soldier info
+	false,	// Vehicle radar [HIDDEN]
+	false,	// Vehicle compass [HIDDEN]
+	true,	// Tank direction indicator
+	true,	// Commanding menu
+	true,	// Group Bar
+	true,	// HUD Weapon Cursors
+	true	// Vehicle display panels
+};
+//disableChannels[]={};//TODO
+
+//keys[] = {}; //List of keys
+//keysLimit = 0;    //Number of keys from the keys list needed for unlock a mission.
+//doneKeys[] = {};  //Name of key(s) needed for mark a mission in SP missions list as completed.
+disabledAI=1; //1, removes all playable units which do not have a human player. When 0, a logging out player will have AI take control of his character.
+//aiKills = 0; //Enables scorelist for AI players TODO needed?
+//briefing = 1;      //briefing screen for SP missions
+Saving = 1; //Toggle saving TODO cusom saving?
+
+showCompass=1;  //Defines if the compass is visible.
+showRadio=1;
+showGPS=1;      //Enables/Disables the GPS
+showMap=1;      //Defines if the map is shown after the mission starts.
+showBinocular=1;
+showNotepad=1;  //In ArmA, defines if the NotePad is shown after the mission starts.    TODO ktore
+showPad = 1;    //Defines if the NotePad is shown after the mission starts. (Not in ArmA) TODO ktore
+showWatch=1;
+
+//showUAVFeed = 1;    //Enables/Disables the UAV Feed. Default: 1.
+showSquadRadar = 1; //Defines if the Squad Radar is visible.
+weaponPool = 0; //Allows equipment transferred from one campaign mission to the next
+allowSubordinatesTakeWeapons= 1; //Allows subordinates (i.e., not leaders)
+enableItemsDropping = 1;// dropping items while swimming
+showGroupIndicator = 1; //Has no effect since custom panels were introduced in Arma 3
+forceRotorLibSimulation =2; //Force enable or disable RotorLib.(air control libery easier)
+allowFunctionsRecompile = 1; //As a security measure, functions are by default protected against rewriting during the mission. TODO 0 for stable
+
+//taskManagement_markers2D = 1; //0: do not use new 2D markers (default), 1: replace task markers with new 2D markers
+taskManagement_markers3D = 1; //0: do not use new 3D markers (default), 1: replace task waypoints with new 3D markers
+taskManagement_propagate = 1; //0: do not propagate (default), 1: propagate shared tasks to subordinates
+taskManagement_drawDist = 2500;//3d marker draw distance in meters (default: 2000). within this range, unassigned tasks are drawn on screen.
+
+//onPseScriptau //Executes a custom .sqf script or function in scheduled environment (execVM) when player brings up Game Pause screen
+//onCheat //Executes custom statement when player enters GETALLGEAR cheat TODO
+//titleParam%  TODO where how to import
+
+
+//Check it here: https://github.com/CBATeam/CBA_A3/wiki/CBA-Settings-System
+//cba_settings_hasSettingsFile = 1;
